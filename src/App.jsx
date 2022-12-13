@@ -18,7 +18,8 @@ class App extends React.Component {
     loged: false,
   };
 
-  sendUser = () => {
+  sendUser = (e) => {
+    e.preventDefault();
     this.setState({ loading: true }, async () => {
       const { userName } = this.state;
       await createUser({ name: userName });

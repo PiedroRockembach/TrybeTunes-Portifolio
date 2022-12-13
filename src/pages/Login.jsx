@@ -15,21 +15,22 @@ class Login extends Component {
       loading ? <Loading />
         : (
           <div data-testid="page-login">
-            <input
-              data-testid="login-name-input"
-              type="text"
-              value={ userName }
-              name="userName"
-              onChange={ inputChange }
-            />
-            <button
-              type="submit"
-              data-testid="login-submit-button"
-              disabled={ !validName }
-              onClick={ createUser }
-            >
-              Entrar
-            </button>
+            <form action="" onSubmit={ createUser }>
+              <input
+                data-testid="login-name-input"
+                type="text"
+                value={ userName }
+                name="userName"
+                onChange={ inputChange }
+              />
+              <button
+                type="submit"
+                data-testid="login-submit-button"
+                disabled={ !validName }
+              >
+                Entrar
+              </button>
+            </form>
           </div>
         )
     );
