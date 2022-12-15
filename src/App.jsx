@@ -30,14 +30,13 @@ class App extends React.Component {
   nameValidate = () => {
     const { userName } = this.state;
     const validNumber = 3;
-    if (userName.length >= validNumber) this.setState({ validName: true });
+    const comparator = userName.length >= validNumber;
+    this.setState({ validName: comparator });
   };
 
   inputChange = ({ target }) => {
     const state = target.name;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    console.log(state);
-    console.log(value);
     this.setState({
       [state]: value,
     }, () => {
