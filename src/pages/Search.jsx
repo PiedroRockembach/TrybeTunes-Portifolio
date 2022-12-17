@@ -6,7 +6,7 @@ import Loading from './Loading';
 
 class Search extends Component {
   state = {
-    artistName: '',
+    artist: '',
     validArtist: false,
     albumsList: [],
     loading: false,
@@ -14,8 +14,8 @@ class Search extends Component {
   };
 
   artistValidate = () => {
-    const { artistName } = this.state;
-    const validName = artistName.length >= 2;
+    const { artist } = this.state;
+    const validName = artist.length >= 2;
     this.setState({ validArtist: validName });
   };
 
@@ -24,8 +24,8 @@ class Search extends Component {
   };
 
   searchAlbums = async () => {
-    const { artistName } = this.state;
-    const albums = await searchAlbumsAPI(artistName);
+    const { artist } = this.state;
+    const albums = await searchAlbumsAPI(artist);
     this.setState({ albumsList: albums, loading: false, search: true });
   };
 
@@ -38,7 +38,7 @@ class Search extends Component {
     const {
       validArtist,
       albumsList,
-      artistName,
+      artist,
       loading,
       search,
     } = this.state;
@@ -51,7 +51,7 @@ class Search extends Component {
               type="text"
               data-testid="search-artist-input"
               onChange={ this.inputChange }
-              name="artistName"
+              name="artist"
             />
             <button
               type="submit"
@@ -66,9 +66,14 @@ class Search extends Component {
           <section>
             {albumsList.length === 0 ? search && <h1>Nenhum álbum foi encontrado</h1> : (
               <div>
-                <h1>{`Resultado de álbuns de: ${artistName}`}</h1>
+                <h1>{`Resultado de álbuns de: ${artist}`}</h1>
                 <ul className="album-list">
-                  {albumsList.map(({ collectionName, artworkUrl100, collectionId }) => (
+                  {albumsList.map(({
+                    collectionName,
+                    artworkUrl100,
+                    collectionId,
+                    artistName,
+                  }) => (
                     <Link
                       data-testid={ `link-to-album-${collectionId}` }
                       key={ collectionName }
@@ -79,6 +84,7 @@ class Search extends Component {
                       >
                         <img src={ artworkUrl100 } alt={ collectionName } />
                         <h2>{collectionName}</h2>
+                        <h3>{artistName}</h3>
                       </li>
                     </Link>
                   ))}
