@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, removeSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends Component {
   state = {
@@ -14,14 +14,14 @@ class MusicCard extends Component {
 
   checkboxHandler = async ({ target }) => {
     const { music, isLoading, refresh, push } = this.props;
-
+    console.log(target.checked);
+    await isLoading(true);
     if (target.checked) {
-      await isLoading(true);
-      await addSong(music);
-      await push();
-      await refresh();
-      await isLoading(false);
-    }
+      (await addSong(music));
+    } else { await removeSong(music); }
+    await push();
+    await refresh();
+    await isLoading(false);
   };
 
   render() {
