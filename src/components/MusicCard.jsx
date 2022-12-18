@@ -13,13 +13,11 @@ class MusicCard extends Component {
   }
 
   checkboxHandler = async ({ target }) => {
-    const { music, isLoading, refresh, push } = this.props;
-    console.log(target.checked);
+    const { music, isLoading, refresh } = this.props;
     await isLoading(true);
     if (target.checked) {
       (await addSong(music));
     } else { await removeSong(music); }
-    await push();
     await refresh();
     await isLoading(false);
   };
