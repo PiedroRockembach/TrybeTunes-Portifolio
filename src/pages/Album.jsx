@@ -4,19 +4,22 @@ import Header from '../components/Header';
 import Loading from './Loading';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends Component {
   state = {
     loading: true,
     musicsList: [],
     artist: '',
+    favoriteList: [],
 
   };
 
   componentDidMount() {
     const prop = this.props;
     const { id } = prop.match.params;
-    this.getData(id).then((data) => {
+    this.getData(id).then(async (data) => {
+      await this.refreshFavorites();
       this.setState({
         musicsList: data,
         artist: data[0].artistName,
@@ -27,8 +30,20 @@ class Album extends Component {
 
   getData = async (id) => {
     const albumInfo = await getMusics(id);
-    // console.log(albumInfo);
     return albumInfo;
+  };
+
+  refreshFavorites = async () => {
+    const favorites = await getFavoriteSongs();
+    this.setState({ favoriteList: favorites }, this.checkFavorite);
+  };
+
+  checkFavorite = (music) => {
+    const { favoriteList } = this.state;
+    if (favoriteList.length !== 0 && music) {
+      const bool = favoriteList.some((song) => song.trackId === music.trackId);
+      return bool;
+    }
   };
 
   render() {
@@ -47,16 +62,19 @@ class Album extends Component {
               {`${musicsList[0].collectionName}`}
             </h2>
             <ul>
-              {musicsList.map((music, index) => (
-                index !== 0 && (
-                  <MusicCard
-                    key={ music.trackName }
-                    trackName={ music.trackName }
-                    url={ music.previewUrl }
-                    trackId={ music.trackId }
-                    music={ music }
-                  />
-                )))}
+              {musicsList.map((music, index) => index !== 0 && (
+                <MusicCard
+                  key={ music.trackName }
+                  trackName={ music.trackName }
+                  url={ music.previewUrl }
+                  trackId={ music.trackId }
+                  music={ music }
+                  isLoading={ (bool) => this.setState({ loading: bool }) }
+                  refresh={ this.refreshFavorites }
+                  checked={ this.checkFavorite(music) }
+                  push={ this.refreshFavorites }
+                />
+              ))}
             </ul>
           </section>
         )}
