@@ -72,7 +72,6 @@ class Album extends Component {
                   isLoading={ (bool) => this.setState({ loading: bool }) }
                   refresh={ this.refreshFavorites }
                   checked={ this.checkFavorite(music) }
-                  push={ this.refreshFavorites }
                 />
               ))}
             </ul>

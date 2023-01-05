@@ -1,0 +1,53 @@
+body {
+  background: linear-gradient(to right, rgba(0, 59, 229, 1), rgba(0, 213, 226, 1));
+}
+
+.page-login {
+  align-items: center;
+  background-image: url('../images/bg_azul.png');
+  background-size: cover;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-login {
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 0 26px rgba(68, 73, 85, 0.2);
+  display: flex;
+  flex-flow: column nowrap;
+  height: 80vh;
+  justify-content: center;
+  width: 50%;
+}
+
+.form-login img {
+  margin-bottom: 50px;
+  width: 30%;
+}
+
+.form-login button {
+  background-color: rgba(0, 59, 229, 1);
+  border: 1px solid  rgba(0, 59, 229, 1);
+  border-radius: 20px;
+  box-shadow: 0 0 26px rgba(68, 73, 85, 0.2);
+  color: white;
+  height: 40px;
+  margin: 5px auto;
+  width: 50%;
+}
+
+.form-login input {
+  background: white;
+  border: 1px solid  rgba(0, 59, 229, 1);
+  border-radius: 20px;
+  box-shadow: 0 0 26px rgba(68, 73, 85, 0.2);
+  height: 40px;
+  margin: 5px auto;
+  text-align: center;
+  width: 50%;
+}
+
