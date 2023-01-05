@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
@@ -54,7 +53,6 @@ class Album extends Component {
     } = this.state;
     return (
       <div data-testid="page-album">
-        <Header />
         {loading ? <Loading /> : (
           <section>
             <h1 data-testid="artist-name">{artist}</h1>

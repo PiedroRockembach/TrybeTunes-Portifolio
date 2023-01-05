@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Header from '../components/Header';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import MusicCard from '../components/MusicCard';
 
@@ -30,7 +29,6 @@ class Favorites extends Component {
     } = this.state;
     return (
       <div data-testid="page-favorites">
-        <Header />
         {loading ? <Loading /> : (
           <ul>
             {songList.map((music) => (

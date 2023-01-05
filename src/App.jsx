@@ -7,8 +7,10 @@ import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import ProfileEdit from './pages/ProfileEdit';
 import Search from './pages/Search';
+import Header from './components/Header';
 
 import { createUser } from './services/userAPI';
+import './css/app.css';
 
 class App extends React.Component {
   state = {
@@ -52,30 +54,39 @@ class App extends React.Component {
       loged,
     } = this.state;
     return (
-      <BrowserRouter>
-        <Switch>
-          <Route
-            exact
-            path="/"
-          >
-            { loged ? <Redirect to="/search" />
-              : (
-                <Login
-                  userName={ userName }
-                  inputChange={ this.inputChange }
-                  validName={ validName }
-                  createUser={ this.sendUser }
-                  loading={ loading }
-                />)}
-          </Route>
-          <Route exact path="/search" render={ () => <Search /> } />
-          <Route exact path="/album/:id" render={ (props) => <Album { ...props } /> } />
-          <Route exact path="/favorites" render={ () => <Favorites /> } />
-          <Route exact path="/profile" render={ () => <Profile /> } />
-          <Route exact path="/profile/edit" render={ () => <ProfileEdit /> } />
-          <Route path="*" render={ () => <NotFound /> } />
-        </Switch>
-      </BrowserRouter>
+      <div className="main-component">
+        <BrowserRouter>
+          {loged && <Header />}
+          <main>
+            <Switch>
+              <Route
+                exact
+                path="/"
+              >
+                { loged ? <Redirect to="/search" />
+                  : (
+                    <Login
+                      userName={ userName }
+                      inputChange={ this.inputChange }
+                      validName={ validName }
+                      createUser={ this.sendUser }
+                      loading={ loading }
+                    />)}
+              </Route>
+              <Route exact path="/search" render={ () => <Search /> } />
+              <Route
+                exact
+                path="/album/:id"
+                render={ (props) => <Album { ...props } /> }
+              />
+              <Route exact path="/favorites" render={ () => <Favorites /> } />
+              <Route exact path="/profile" render={ () => <Profile /> } />
+              <Route exact path="/profile/edit" render={ () => <ProfileEdit /> } />
+              <Route path="*" render={ () => <NotFound /> } />
+            </Switch>
+          </main>
+        </BrowserRouter>
+      </div>
     );
   }
 }

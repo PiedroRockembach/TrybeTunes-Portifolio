@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Loading from './Loading';
+import Loading from '../components/Loading';
+import Logo from '../components/Logo';
 
 import '../css/login.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-const logo = require('../images/logo.png');
 
 class Login extends Component {
   render() {
@@ -21,9 +20,9 @@ class Login extends Component {
         : (
           <div data-testid="page-login" className="page-login">
             <form action="" onSubmit={ createUser } className="form-login">
-              <img src={ logo } alt="Trybe Tunes" />
+              <Logo />
               <input
-                // className="form-control"
+                className="input-text "
                 placeholder="qual o seu nome?"
                 data-testid="login-name-input"
                 type="text"
@@ -32,7 +31,7 @@ class Login extends Component {
                 onChange={ inputChange }
               />
               <button
-                // className="btn btn-primary"
+                className={ `input-button ${!validName && 'disabled'}` }
                 type="submit"
                 data-testid="login-submit-button"
                 disabled={ !validName }
