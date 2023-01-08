@@ -5,7 +5,7 @@ class Profile extends Component {
   render() {
     return (
       <div data-testid="page-profile">
-        <Header />
+        <p>oi</p>
       </div>
     );
   }

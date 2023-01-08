@@ -4,6 +4,7 @@ import Loading from '../components/Loading';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
+import LoadingLarge from '../components/LoadingLarge';
 
 class Album extends Component {
   state = {
@@ -53,7 +54,7 @@ class Album extends Component {
     } = this.state;
     return (
       <div data-testid="page-album">
-        {loading ? <Loading /> : (
+        {loading ? <LoadingLarge /> : (
           <section>
             <h1 data-testid="artist-name">{artist}</h1>
             <h2 data-testid="album-name">
