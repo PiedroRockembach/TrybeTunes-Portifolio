@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import Loading from '../components/Loading';
+import LoadingLarge from '../components/LoadingLarge';
+import SearchInput from '../components/SearchInput';
 
 class Search extends Component {
   state = {
     artist: '',
     validArtist: false,
-    albumsList: [],
+    albumsLi: [],
     loading: false,
     search: false,
   };
@@ -25,7 +26,7 @@ class Search extends Component {
   searchAlbums = async () => {
     const { artist } = this.state;
     const albums = await searchAlbumsAPI(artist);
-    this.setState({ albumsList: albums, loading: false, search: true });
+    this.setState({ albumsLi: albums, loading: false, search: true });
   };
 
   load = (e) => {
@@ -36,59 +37,50 @@ class Search extends Component {
   render() {
     const {
       validArtist,
-      albumsList,
+      albumsLi,
       artist,
       loading,
       search,
     } = this.state;
     return (
-      <div data-testid="page-search">
-        { !loading && (
-          <form action="" onSubmit={ this.load }>
-            <input
-              type="text"
-              data-testid="search-artist-input"
-              onChange={ this.inputChange }
-              name="artist"
-            />
-            <button
-              type="submit"
-              data-testid="search-artist-button"
-              disabled={ !validArtist }
-            >
-              Pesquisar
-            </button>
-          </form>) }
+      <div data-testid="page-search" className="page-search">
+        <SearchInput
+          load={ this.load }
+          inputChange={ this.inputChange }
+          validArtist={ validArtist }
+        />
 
-        { loading ? <Loading /> : (
-          <section>
-            {albumsList.length === 0 ? search && <h1>Nenhum álbum foi encontrado</h1> : (
-              <div>
-                <h1>{`Resultado de álbuns de: ${artist}`}</h1>
-                <ul className="album-list">
-                  {albumsList.map(({
-                    collectionName,
-                    artworkUrl100,
-                    collectionId,
-                    artistName,
-                  }) => (
-                    <Link
-                      data-testid={ `link-to-album-${collectionId}` }
-                      key={ collectionName }
-                      to={ `album/${collectionId}` }
-                    >
-                      <li
-                        className="album-item"
+        <section className="section-albuns">
+          { loading ? <LoadingLarge /> : (
+            <div className="albuns-menu">
+              {albumsLi.length === 0 ? search && <h1>Nenhum álbum foi encontrado</h1> : (
+                <div className="albuns-container">
+                  <h1>{`Resultado de álbuns de ${artist}:`}</h1>
+                  <div className="album-list">
+                    {albumsLi.map(({
+                      collectionName,
+                      artworkUrl100,
+                      collectionId,
+                      artistName,
+                    }) => (
+                      <Link
+                        data-testid={ `link-to-album-${collectionId}` }
+                        key={ collectionName }
+                        to={ `album/${collectionId}` }
                       >
-                        <img src={ artworkUrl100 } alt={ collectionName } />
-                        <h2>{collectionName}</h2>
-                        <h3>{artistName}</h3>
-                      </li>
-                    </Link>
-                  ))}
-                </ul>
-              </div>)}
-          </section>)}
+                        <li
+                          className="album-item"
+                        >
+                          <img src={ artworkUrl100 } alt={ collectionName } />
+                          <h2 maxLeng>{collectionName}</h2>
+                          <h3>{artistName}</h3>
+                        </li>
+                      </Link>
+                    ))}
+                  </div>
+                </div>)}
+            </div>)}
+        </section>
       </div>
     );
   }

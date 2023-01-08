@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Loading from '../components/Loading';
+import LoadingLarge from '../components/LoadingLarge';
 import Logo from '../components/Logo';
 
 import '../css/login.css';
@@ -16,7 +16,7 @@ class Login extends Component {
       loading,
     } = this.props;
     return (
-      loading ? <Loading />
+      loading ? <LoadingLarge />
         : (
           <div data-testid="page-login" className="page-login">
             <form action="" onSubmit={ createUser } className="form-login">

@@ -20,6 +20,11 @@ class App extends React.Component {
     loged: false,
   };
 
+  componentDidMount() {
+    const loginTest = localStorage.getItem('user');
+    this.setState({ loged: loginTest });
+  }
+
   sendUser = (e) => {
     e.preventDefault();
     this.setState({ loading: true }, async () => {
@@ -53,6 +58,7 @@ class App extends React.Component {
       loading,
       loged,
     } = this.state;
+
     return (
       <div className="main-component">
         <BrowserRouter>
