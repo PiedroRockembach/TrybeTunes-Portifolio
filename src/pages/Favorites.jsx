@@ -3,6 +3,8 @@ import Loading from '../components/Loading';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import MusicCard from '../components/MusicCard';
 
+import '../css/favorites.css';
+
 class Favorites extends Component {
   state = {
     loading: false,
@@ -28,23 +30,28 @@ class Favorites extends Component {
       songList,
     } = this.state;
     return (
-      <div data-testid="page-favorites">
-        {loading ? <Loading /> : (
-          <ul>
-            {songList.map((music) => (
-              <MusicCard
-                key={ music.trackName }
-                trackName={ music.trackName }
-                url={ music.previewUrl }
-                trackId={ music.trackId }
-                music={ music }
-                isLoading={ (bool) => this.setState({ loading: bool }) }
-                refresh={ this.refreshFavorites }
-                checked
-              />
-            ))}
-          </ul>
-        ) }
+      <div data-testid="page-favorites" className="page-favorites">
+        <header className="favorites-header">
+          Músicas Favoritas
+        </header>
+        <div className="favorite-songs">
+          {loading ? <Loading /> : (
+            <ul>
+              {songList.map((music) => (
+                <MusicCard
+                  key={ music.trackName }
+                  trackName={ music.trackName }
+                  url={ music.previewUrl }
+                  trackId={ music.trackId }
+                  music={ music }
+                  isLoading={ (bool) => this.setState({ loading: bool }) }
+                  refresh={ this.refreshFavorites }
+                  checked
+                />
+              ))}
+            </ul>
+          ) }
+        </div>
       </div>
     );
   }

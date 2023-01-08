@@ -58,3 +58,99 @@
 .albuns-menu {
   width: 100%;
 }
+
+.album-page {
+  align-items: center;
+  background-color: rgba(239, 243, 249, 1);
+  display: flex;
+  justify-content: center;
+  margin-top: 30vh;
+  width: 100%;
+}
+
+.album-pic {
+  width: 400px;
+}
+
+.album-pic img {
+  border-radius: 12px;
+  filter: drop-shadow(-9px 8px 8px rgba(68, 73, 85, 0.4));
+  height: 300px;
+  margin: 0 50px;
+  width: 300px;
+}
+
+.album-header {
+  color: white;
+  height: 150px;
+  width: 100%;
+}
+
+.album-songs {
+  width: 100%;
+}
+
+.album-content {
+  align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  padding: 0 5%;
+  transform: translate(0, -150px);
+}
+
+.album-content ul {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.music-card {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+}
+
+.song-name {
+  align-items: center;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  margin: 5px;
+  overflow: hidden;
+  width: 300px;
+}
+
+.song-name h1 {
+  font-size: 20px;
+}
+
+.album-track {
+  align-items: center;
+  display: flex;
+  max-width: 500px;
+  min-width: 300px;
+
+
+}
+
+.album-track audio {
+  max-width: 500px;
+  min-width: 300px;
+}
+
+.favorite-checkbox {
+  align-items: center;
+  display: flex;
+  font-size: 50px;
+  justify-content: center;
+  position: relative;
+  width: 100px;
+}
+
+.favorite-checkbox input {
+  display: none;
+}
+
+.favorite-checkbox input:checked ~ .checkmark {
+  color: red;
+}

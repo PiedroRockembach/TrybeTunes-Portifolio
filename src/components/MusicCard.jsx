@@ -30,26 +30,27 @@ class MusicCard extends Component {
       trackId,
     } = this.props;
     return (
-      <div>
-        <h1>{trackName}</h1>
-        <audio data-testid="audio-component" src={ url } controls>
-          <track kind="captions" />
-          O seu navegador não suporta o elemento
-          {' '}
-          <code>audio</code>
-          .
-        </audio>
-        <label htmlFor="trackId">
-          Favorita
+      <div className="music-card">
+        <div className="song-name"><h1>{trackName}</h1></div>
+        <div className="album-track">
+          <audio data-testid="audio-component" src={ url } controls>
+            <track kind="captions" />
+            O seu navegador não suporta o elemento
+            {' '}
+            <code>audio</code>
+            .
+          </audio>
+        </div>
+        <label htmlFor={ trackId } className="favorite-checkbox">
           <input
             type="checkbox"
             name=""
-            id="trackId"
+            id={ trackId }
             data-testid={ `checkbox-music-${trackId}` }
             onChange={ this.checkboxHandler }
             checked={ check }
           />
-
+          <span className="checkmark">&hearts;</span>
         </label>
       </div>
     );

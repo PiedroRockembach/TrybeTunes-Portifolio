@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Loading from '../components/Loading';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
 import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import LoadingLarge from '../components/LoadingLarge';
+
+import '../css/albuns.css';
 
 class Album extends Component {
   state = {
@@ -12,6 +13,7 @@ class Album extends Component {
     musicsList: [],
     artist: '',
     favoriteList: [],
+    artwork: '',
 
   };
 
@@ -20,10 +22,12 @@ class Album extends Component {
     const { id } = prop.match.params;
     this.getData(id).then(async (data) => {
       await this.refreshFavorites();
+      console.log(data);
       this.setState({
         musicsList: data,
         artist: data[0].artistName,
         loading: false,
+        artwork: data[0].artworkUrl100,
       });
     });
   }
@@ -51,29 +55,37 @@ class Album extends Component {
       loading,
       artist,
       musicsList,
+      artwork,
     } = this.state;
     return (
-      <div data-testid="page-album">
+      <div data-testid="page-album" className="album-page">
         {loading ? <LoadingLarge /> : (
-          <section>
-            <h1 data-testid="artist-name">{artist}</h1>
-            <h2 data-testid="album-name">
-              {`${musicsList[0].collectionName}`}
-            </h2>
-            <ul>
-              {musicsList.map((music, index) => index !== 0 && (
-                <MusicCard
-                  key={ music.trackName }
-                  trackName={ music.trackName }
-                  url={ music.previewUrl }
-                  trackId={ music.trackId }
-                  music={ music }
-                  isLoading={ (bool) => this.setState({ loading: bool }) }
-                  refresh={ this.refreshFavorites }
-                  checked={ this.checkFavorite(music) }
-                />
-              ))}
-            </ul>
+          <section className="album-content">
+            <div className="album-pic">
+              <img src={ artwork } alt="" />
+            </div>
+            <div className="album-songs">
+              <header className="album-header">
+                <h1 data-testid="artist-name">{artist}</h1>
+                <h2 data-testid="album-name">
+                  {`${musicsList[0].collectionName}`}
+                </h2>
+              </header>
+              <ul>
+                {musicsList.map((music, index) => index !== 0 && (
+                  <MusicCard
+                    key={ music.trackName }
+                    trackName={ music.trackName }
+                    url={ music.previewUrl }
+                    trackId={ music.trackId }
+                    music={ music }
+                    isLoading={ (bool) => this.setState({ loading: bool }) }
+                    refresh={ this.refreshFavorites }
+                    checked={ this.checkFavorite(music) }
+                  />
+                ))}
+              </ul>
+            </div>
           </section>
         )}
       </div>
