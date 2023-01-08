@@ -52,6 +52,7 @@
   background-color: rgba(239, 243, 249, 1);
   display: flex;
   justify-content: center;
+  min-height: 70vh;
   width: 100%;
 }
 
