@@ -13,6 +13,10 @@
   width: 100%;
 }
 
+.not-found {
+  color: black;
+}
+
 .search-input input {
   background-color: var(--input-color);
   border: none;

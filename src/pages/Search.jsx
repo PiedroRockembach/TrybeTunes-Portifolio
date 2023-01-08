@@ -53,7 +53,9 @@ class Search extends Component {
         <section className="section-albuns">
           { loading ? <LoadingLarge /> : (
             <div className="albuns-menu">
-              {albumsLi.length === 0 ? search && <h1>Nenhum álbum foi encontrado</h1> : (
+              {albumsLi.length === 0 ? search && (
+                <h1 className="not-found">Nenhum álbum foi encontrado</h1>
+              ) : (
                 <div className="albuns-container">
                   <h1>{`Resultado de álbuns de ${artist}:`}</h1>
                   <div className="album-list">
