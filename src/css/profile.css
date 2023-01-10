@@ -46,3 +46,20 @@
   padding: 10px;
   width: 150px;
 }
+
+.profile-edit {
+  background-color: rgba(239, 243, 249, 1);
+  display: flex;
+  flex-flow: column;
+  margin-top: 30vh;
+  min-height: 70vh;
+  width: 100%;
+}
+
+.profile-edit h1 {
+  text-align: center;
+}
+
+.profile-edit p {
+  text-align: center;
+}
