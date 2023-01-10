@@ -11,6 +11,7 @@ class Search extends Component {
     albumsLi: [],
     loading: false,
     search: false,
+    showName: '',
   };
 
   artistValidate = () => {
@@ -25,8 +26,15 @@ class Search extends Component {
 
   searchAlbums = async () => {
     const { artist } = this.state;
-    const albums = await searchAlbumsAPI(artist);
-    this.setState({ albumsLi: albums, loading: false, search: true });
+    const str = artist;
+    const albums = await searchAlbumsAPI(str);
+    this.setState({
+      showName: str,
+      albumsLi: albums,
+      loading: false,
+      search: true,
+      artist: '',
+    });
   };
 
   load = (e) => {
@@ -36,9 +44,10 @@ class Search extends Component {
 
   render() {
     const {
+      artist,
       validArtist,
       albumsLi,
-      artist,
+      showName,
       loading,
       search,
     } = this.state;
@@ -48,6 +57,7 @@ class Search extends Component {
           load={ this.load }
           inputChange={ this.inputChange }
           validArtist={ validArtist }
+          inputValue={ artist }
         />
 
         <section className="section-albuns">
@@ -57,24 +67,24 @@ class Search extends Component {
                 <h1 className="not-found">Nenhum álbum foi encontrado</h1>
               ) : (
                 <div className="albuns-container">
-                  <h1>{`Resultado de álbuns de ${artist}:`}</h1>
+                  <h1>{`Resultado de álbuns de: ${showName}`}</h1>
                   <div className="album-list">
                     {albumsLi.map(({
                       collectionName,
                       artworkUrl100,
                       collectionId,
                       artistName,
-                    }) => (
+                    }, index) => (
                       <Link
                         data-testid={ `link-to-album-${collectionId}` }
-                        key={ collectionName }
+                        key={ `${collectionName}-${index}` }
                         to={ `album/${collectionId}` }
                       >
                         <li
                           className="album-item"
                         >
                           <img src={ artworkUrl100 } alt={ collectionName } />
-                          <h2 maxLeng>{collectionName}</h2>
+                          <h2>{collectionName}</h2>
                           <h3>{artistName}</h3>
                         </li>
                       </Link>

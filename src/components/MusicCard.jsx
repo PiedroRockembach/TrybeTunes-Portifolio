@@ -42,6 +42,7 @@ class MusicCard extends Component {
           </audio>
         </div>
         <label htmlFor={ trackId } className="favorite-checkbox">
+          Favorita
           <input
             type="checkbox"
             name=""
@@ -50,7 +51,6 @@ class MusicCard extends Component {
             onChange={ this.checkboxHandler }
             checked={ check }
           />
-          <span className="checkmark">&hearts;</span>
         </label>
       </div>
     );

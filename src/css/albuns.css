@@ -52,11 +52,11 @@
   background-color: rgba(239, 243, 249, 1);
   display: flex;
   justify-content: center;
-  min-height: 70vh;
   width: 100%;
 }
 
 .albuns-menu {
+  min-height: 70vh;
   width: 100%;
 }
 
@@ -112,6 +112,10 @@
   justify-content: space-between;
 }
 
+.music-card label {
+  font-size: 10px;
+}
+
 .song-name {
   align-items: center;
   display: flex;
@@ -155,4 +159,8 @@
 
 .favorite-checkbox input:checked ~ .checkmark {
   color: red;
+}
+
+.not-found {
+  color: black;
 }

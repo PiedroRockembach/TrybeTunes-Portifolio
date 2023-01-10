@@ -4,7 +4,6 @@ import LoadingLarge from '../components/LoadingLarge';
 import Logo from '../components/Logo';
 
 import '../css/login.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Login extends Component {
   render() {

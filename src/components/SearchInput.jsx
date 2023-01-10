@@ -9,11 +9,13 @@ class SearchInput extends Component {
       load,
       inputChange,
       validArtist,
+      inputValue,
     } = this.props;
     return (
       <form action="" onSubmit={ load } className="search-input">
         <input
           type="text"
+          value={ inputValue }
           data-testid="search-artist-input"
           onChange={ inputChange }
           name="artist"
