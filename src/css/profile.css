@@ -12,6 +12,7 @@
   background-color: rgba(239, 243, 249, 1);
   display: flex;
   min-height: 70vh;
+  min-width: 300px;
   width: 100%;
 }
 
@@ -47,19 +48,11 @@
   width: 150px;
 }
 
-.profile-edit {
+/* .profile-edit {
   background-color: rgba(239, 243, 249, 1);
   display: flex;
   flex-flow: column;
   margin-top: 30vh;
   min-height: 70vh;
   width: 100%;
-}
-
-.profile-edit h1 {
-  text-align: center;
-}
-
-.profile-edit p {
-  text-align: center;
-}
+} */

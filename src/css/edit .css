@@ -1,0 +1,11 @@
+.profile-edit-page {
+  background-color: rgba(239, 243, 249, 1);
+  display: flex;
+  margin-top: 30vh;
+  min-height: 70vh;
+}
+
+.form-edit {
+  display: flex;
+  flex-direction: column;
+}
